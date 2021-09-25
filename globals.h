@@ -16,7 +16,7 @@ enum ERORS {
 
 typedef struct {
     char* string;
-    int length;
+    size_t length;
 } text;
 
 

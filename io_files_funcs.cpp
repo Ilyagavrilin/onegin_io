@@ -37,7 +37,7 @@ size_t strings_sep(char* buffer, size_t buf_sz) {
 
     int i = 0;
     size_t string_num = 0;
-    while (i <= buf_sz) {
+    while (i < buf_sz) {
         if (buffer[i] == '\n') {
             buffer[i] = '\0';
             string_num++;
@@ -52,11 +52,43 @@ size_t strings_sep(char* buffer, size_t buf_sz) {
     return string_num;
 }
 
-text* text_initialize(size_t string_num) {
+text* struct_initialize(size_t string_num) {
     text* strings = (text*) calloc(string_num, sizeof(text));
-    if (strings == NULL) {return NULL;}
+    if (strings == NULL) {
+        return NULL;
+    }
 
     return strings;
+}
+
+int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_size) {
+    if (strings == NULL || buffer == NULL) {
+        return ERROR;
+    }
+
+    size_t string_pos = 0;
+    size_t buffer_pos = 0;
+
+    char* pointer = buffer;
+    size_t length = 0;
+
+    while ((string_pos <= string_num) && (buffer_pos < buffer_size)) {
+        if (buffer[buffer_pos] == '\0') {
+
+            strings[string_pos].string = pointer;
+            strings[string_pos].length = length;
+            string_pos++;
+
+            pointer = buffer + (buffer_pos + 1);
+            length = 0;
+        }
+
+        buffer_pos++;
+        length++;
+
+    }
+
+    return 0;
 }
 
 int read_data(int file_handle, void* buffer, size_t f_size) {

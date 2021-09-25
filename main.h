@@ -2,8 +2,8 @@
 #define ONEGIN_MAIN_H
 
 #include "globals.h"
-#include "files_funcs.h"
-#include "sorter.h"
+//#include "files_funcs.h"
+//#include "sorter.h"
 #include "wrapper.h"
 
 #include <io.h>
