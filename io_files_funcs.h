@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <sys\stat.h>
 #include <assert.h>
+#include <stdio.h>
 
 #include "globals.h"
 
@@ -16,4 +17,5 @@ text* struct_initialize(size_t string_num);
 int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_size);
 int read_data(int file_handle, void* buffer, size_t f_size);
 int file_close(int file_handle);
+int write_data(int file_handle, text *strings, size_t number_strings);
 #endif //ONEGIN_IO_FILES_FUNCS_H

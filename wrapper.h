@@ -5,6 +5,7 @@
 
 #include "globals.h"
 #include "io_files_funcs.h"
+#include "qsort_cmp.h"
 
 int MainWrapper();
 

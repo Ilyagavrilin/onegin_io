@@ -24,9 +24,9 @@ int comp_letter(const char* str, int start, int end) {
 }
 
 
-int comparsion (struct text *strings, int position, const char *str2) {
-    str1 = strings[position].string;
-    size_t length = min_len(strlen(str1), strlen(str2));
+int comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
+    size_t length = min_len(len1, len2);
+
     int result = 0;
 
     int shift1 = 0;
@@ -61,14 +61,15 @@ int comparsion (struct text *strings, int position, const char *str2) {
 
     return result;
 }
-int cmp(struct text *strings, int position,  const char *str2, int str2_len,  char sort_type) {
-    if (sort_type == 's') {return comparsion(struct text *strings, int position, const char *str2)}
+int cmp(text *strings, int num1,  int num2,  char sort_type) {
+    if (sort_type == 's') {return comparsion(strings, num1, num2);}
+    else if (return rev_comparsion(strings, num1, num2);)
 }
 
-int QSorter(struct text *strings, int left, int right)
+int QSorter(text *strings, int left, int right)
 {
     const char* pivot = strings[left].string;
-    const int piv_length = strings[left].length
+    const int piv_length = strings[left].length;
     int left_fix = left;
     int right_fix = right;
     while (left < right)

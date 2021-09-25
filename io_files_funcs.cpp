@@ -105,6 +105,19 @@ int read_data(int file_handle, void* buffer, size_t f_size) {
     return 0;
 }
 
+int write_data(int file_handle, text *strings, size_t number_strings) {
+    if ((file_handle == NULL) || strings == NULL) {
+        return ERROR;
+    }
+    for (int string_num = 0; string_num < number_strings; string_num++) {
+        if (strings[string_num].length == 0) {continue;}
+        assert(write(file_handle, strings[string_num].string, strings[string_num].length) != -1);
+        write(file_handle, "\n", 1);
+    }
+
+    return 0;
+}
+
 int file_close(int file_handle) {
     if (file_handle == -1) {
         return ERROR;

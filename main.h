@@ -4,12 +4,10 @@
 #include "globals.h"
 //#include "files_funcs.h"
 //#include "sorter.h"
+#include "qsort_cmp.h"
 #include "wrapper.h"
 
-#include <io.h>
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
+
 
 
 #endif //ONEGIN_MAIN_H
