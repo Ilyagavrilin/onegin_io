@@ -80,12 +80,14 @@ int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_si
             string_pos++;
 
             pointer = buffer + (buffer_pos + 1);
+            buffer_pos++;
             length = 0;
         }
 
-        buffer_pos++;
-        length++;
-
+        else {
+            buffer_pos++;
+            length++;
+        }
     }
 
     return 0;
@@ -96,7 +98,7 @@ int read_data(int file_handle, void* buffer, size_t f_size) {
         return ERROR;
     }
 
-    printf("%d\n", read(file_handle, buffer, f_size));
+    assert(read(file_handle, buffer, f_size) != -1);
     if (*((char*)buffer + f_size - 1) != '\n') {
         *((char*)buffer + f_size - 1) = '\n';
     }

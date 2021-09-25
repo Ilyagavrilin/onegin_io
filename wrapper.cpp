@@ -14,8 +14,10 @@ int MainWrapper() {
     text *strings = struct_initialize(string_num);
     struct_fill(strings, string_num, buffer, f_size);
 
+
+
     printf("%d\n", f_size);
-    for (int i = 0; i <= string_num; i++) {
+    for (int i = 0; i < string_num; i++) {
         printf("%s", strings[i].string);
         printf(" %d\n", strings[i].length);
     }
