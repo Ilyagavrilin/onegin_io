@@ -94,6 +94,12 @@ int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_si
 
 int read_data(int file_handle, void* buffer, size_t f_size) {
     if (file_handle == -1 || buffer == NULL) {
+        if (file_handle == -1) {
+            fprintf(stderr, "func read_data(): you try read data from empty file handle.\n");
+        }
+        else {
+            fprintf(stderr, "func read_data(): you try put info from file to empty buffer.\n");
+        }
         return ERROR;
     }
 
@@ -106,6 +112,7 @@ int read_data(int file_handle, void* buffer, size_t f_size) {
 
 int write_data(int file_handle, text *strings, size_t number_strings) {
     if ((file_handle == NULL) || strings == NULL) {
+        fprintf(stderr, "Func write_data(): you try");
         return ERROR;
     }
     for (int string_num = 0; string_num < number_strings; string_num++) {

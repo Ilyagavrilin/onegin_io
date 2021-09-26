@@ -1,6 +1,8 @@
 #include "wrapper.h"
 
 int MainWrapper() {
+    const char* separator = "/-------------------------------------\n";
+
     const char * write_fname = "C:/Users/gavri/CLionProjects/onegin_indexed/write.txt";
     const char* read_fname = "C:/Users/gavri/CLionProjects/onegin_indexed/get.txt";
 
@@ -19,6 +21,11 @@ int MainWrapper() {
 
     int file_handle_write = file_open(write_fname, 'w');
     write_data(file_handle_write, strings, string_num);
+    RevQSorter(strings, 0, string_num - 1);
+    write(file_handle_write, separator, strlen(separator));
+    write_data(file_handle_write, strings, string_num);
+    write(file_handle_write, separator, strlen(separator));
+    write(file_handle_write, buffer, f_size);
     file_close(file_handle_write);
 
 

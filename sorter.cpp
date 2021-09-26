@@ -23,7 +23,7 @@ int comp_letter(const char* str, int start, int end) {
     return EMPTY;
 }
 
-//Make reverse comparsion
+
 int rev_comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
     size_t length = min_len(len1, len2);
 
@@ -75,6 +75,7 @@ int RevQSorter(text *strings, int left, int right)
         if (left != right)
         {
             strings[left].string = strings[right].string;
+            strings[left].length = strings[right].length;
             left++;
         }
         while (rev_comparsion(strings[left].string, strings[left].length, pivot, piv_length) <= 0 && (left < right))
@@ -82,6 +83,7 @@ int RevQSorter(text *strings, int left, int right)
         if (left != right)
         {
             strings[right].string = strings[left].string;
+            strings[right].length = strings[left].length;
             right--;
         }
     }

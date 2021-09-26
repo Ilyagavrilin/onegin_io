@@ -4,11 +4,11 @@
 
 #include "globals.h"
 
-size_t min_len (size_t len1 = 0, size_t len2 = 0);
+size_t minim_len (size_t len1 = 0, size_t len2 = 0);
 
-int is_letter(char val);
+int is_letters(char val);
 
-int comp_letter(const char* str, int start, int end);
+int comp_letters(const char* str, int start, int end);
 int compare(const void* struct1, const void* struct2);
 
 
