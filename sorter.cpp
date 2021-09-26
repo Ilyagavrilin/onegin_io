@@ -15,16 +15,16 @@ int is_letter(char val) {
 }
 
 int comp_letter(const char* str, int start, int end) {
-    for (int shift = 0; shift + start < end; shift++) {
-        if (is_letter(str[start + shift])) {
+    for (int shift = 0; start - shift > end; shift++) {
+        if (is_letter(str[start - shift])) {
             return shift;
         }
     }
     return EMPTY;
 }
 
-
-int comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
+//Make reverse comparsion
+int rev_comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
     size_t length = min_len(len1, len2);
 
     int result = 0;
@@ -33,27 +33,27 @@ int comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
     int shift2 = 0;
 
     for (int i = 0; i < length; i++) {
-        shift1 = comp_letter(str1, i, length);
-        shift2 = comp_letter(str2, i, length);
+        shift1 = comp_letter(str1, len1 - i, 0);
+        shift2 = comp_letter(str2, len2 - i, 0);
 
         if (shift1 == EMPTY && shift2 == EMPTY) {
             result = 0;
             break;
         }
         else if (shift1 == EMPTY) {
-            result = -1;
+            result = 1;
             break;
         }
         else if (shift2 == EMPTY) {
-            result = 1;
+            result = -1;
             break;
         }
 
-        if (str1[i + shift1] > str2[i + shift2]) {
+        if (str1[len1 - (i + shift1)] > str2[len2 - (i + shift2)]) {
             result = 1;
             break;
         }
-        else if (str1[i + shift1] < str2[i + shift2]) {
+        else if (str1[len1 - (i + shift1)] < str2[len2 - (i + shift2)]) {
             result = -1;
             break;
         }
@@ -61,12 +61,8 @@ int comparsion (const char* str1, size_t len1, const char* str2, size_t len2) {
 
     return result;
 }
-int cmp(text *strings, int num1,  int num2,  char sort_type) {
-    if (sort_type == 's') {return comparsion(strings, num1, num2);}
-    else if (return rev_comparsion(strings, num1, num2);)
-}
 
-int QSorter(text *strings, int left, int right)
+int RevQSorter(text *strings, int left, int right)
 {
     const char* pivot = strings[left].string;
     const int piv_length = strings[left].length;
@@ -74,14 +70,14 @@ int QSorter(text *strings, int left, int right)
     int right_fix = right;
     while (left < right)
     {
-        while (comparsion(strings, pivot) >= 0 && (left < right))
+        while (rev_comparsion(strings[right].string, strings[right].length, pivot, piv_length) >= 0 && (left < right))
             right--;
         if (left != right)
         {
             strings[left].string = strings[right].string;
             left++;
         }
-        while (comparsion(strings[left].string, pivot) <= 0 && (left < right))
+        while (rev_comparsion(strings[left].string, strings[left].length, pivot, piv_length) <= 0 && (left < right))
             left++;
         if (left != right)
         {
@@ -89,13 +85,14 @@ int QSorter(text *strings, int left, int right)
             right--;
         }
     }
-    strings[left].string = pivot;
+    strings[left].string = (char*) pivot;
+    strings[left].length = piv_length;
     int pivot_num = left;
     if (left_fix < pivot_num) {
-        QSorter(strings, left_fix, pivot_num - 1);
+        RevQSorter(strings, left_fix, pivot_num - 1);
     }
     if (right_fix > pivot_num) {
-        QSorter(strings, pivot_num + 1, right_fix);
+        RevQSorter(strings, pivot_num + 1, right_fix);
     }
     return 0;
 }

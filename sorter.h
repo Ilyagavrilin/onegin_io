@@ -19,7 +19,7 @@ size_t min_len (size_t len1 = 0, size_t len2 = 0);
  * @param [in] str2 string to compare
  * @return 1 if str1 > str2, 0 if str1 = str2, -1 if str2 > str1
  */
-int comparsion (struct text *strings, int position, const char *str2);
+int comparsion (text *strings, int position, const char *str2);
 /*!
  * @brief String sorter, uses Hoar`s sort algorithm (quicksort)
  * @param [in] Pointer massive of pointers to strings
@@ -27,7 +27,7 @@ int comparsion (struct text *strings, int position, const char *str2);
  * @param [in] e_elem_fix position of element which end sort
  * @return 0, or ERROR in cause of error
  */
-int QSorter(struct text *strings, int left, int right);
+int RevQSorter(text *strings, int left, int right);
 
 int is_letter(char val);
 

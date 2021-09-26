@@ -39,7 +39,6 @@ size_t strings_sep(char* buffer, size_t buf_sz) {
     size_t string_num = 0;
     while (i < buf_sz) {
         if (buffer[i] == '\n') {
-            buffer[i] = '\0';
             string_num++;
         }
         else if (buffer[i] == '\r') {
@@ -73,7 +72,7 @@ int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_si
     size_t length = 0;
 
     while ((string_pos <= string_num) && (buffer_pos < buffer_size)) {
-        if (buffer[buffer_pos] == '\0') {
+        if (buffer[buffer_pos] == '\n') {
 
             strings[string_pos].string = pointer;
             strings[string_pos].length = length;
@@ -111,8 +110,7 @@ int write_data(int file_handle, text *strings, size_t number_strings) {
     }
     for (int string_num = 0; string_num < number_strings; string_num++) {
         if (strings[string_num].length == 0) {continue;}
-        assert(write(file_handle, strings[string_num].string, strings[string_num].length) != -1);
-        write(file_handle, "\n", 1);
+        assert(write(file_handle, strings[string_num].string, strings[string_num].length + 1) != -1);
     }
 
     return 0;
@@ -122,7 +120,6 @@ int file_close(int file_handle) {
     if (file_handle == -1) {
         return ERROR;
     }
-
     return close(file_handle);
 }
 

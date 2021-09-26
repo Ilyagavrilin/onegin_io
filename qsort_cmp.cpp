@@ -34,8 +34,8 @@ int compare(const void* struct1, const void* struct2) {
     int shift2 = 0;
 
     for (int i = 0; i < length; i++) {
-        shift1 = comp_letter(str1, i, length);
-        shift2 = comp_letter(str2, i, length);
+        shift1 = comp_letter(str1, i, ((text*)struct1)->length);
+        shift2 = comp_letter(str2, i, ((text*)struct2)->length);
 
         if (shift1 == EMPTY && shift2 == EMPTY) {
             result = 0;
