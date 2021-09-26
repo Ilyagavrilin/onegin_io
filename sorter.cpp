@@ -74,16 +74,14 @@ int RevQSorter(text *strings, int left, int right)
             right--;
         if (left != right)
         {
-            strings[left].string = strings[right].string;
-            strings[left].length = strings[right].length;
+            strings[left] = strings[right];
             left++;
         }
         while (rev_comparsion(strings[left].string, strings[left].length, pivot, piv_length) <= 0 && (left < right))
             left++;
         if (left != right)
         {
-            strings[right].string = strings[left].string;
-            strings[right].length = strings[left].length;
+            strings[right] = strings[left];
             right--;
         }
     }
