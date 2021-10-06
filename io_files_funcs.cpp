@@ -19,13 +19,13 @@ void* mem_aloc(size_t file_sz) {
 
 int file_open(const char* filename, char operation_type) {
     if (filename == NULL) {
-        return ERROR;
+        return NULL_PTR;
     }
 
-    int access = ERROR;
+    int access = NULL_PTR;
     if (operation_type == 'r') {access = O_RDONLY;}
     else if (operation_type == 'w') {access = O_WRONLY;}
-    else {return ERROR;}
+    else {return WRONG_ANS;}
 
     int file_handle = open(filename, access);
 
@@ -60,9 +60,9 @@ text* struct_initialize(size_t string_num) {
     return strings;
 }
 
-int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_size) {
+ERORS struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_size) {
     if (strings == NULL || buffer == NULL) {
-        return ERROR;
+        return NULL_PTR;
     }
 
     size_t string_pos = 0;
@@ -89,10 +89,10 @@ int struct_fill(text *strings, size_t string_num, char* buffer, size_t buffer_si
         }
     }
 
-    return 0;
+    return OK;
 }
 
-int read_data(int file_handle, void* buffer, size_t f_size) {
+ERORS read_data(int file_handle, void* buffer, size_t f_size) {
     if (file_handle == -1 || buffer == NULL) {
         if (file_handle == -1) {
             fprintf(stderr, "func read_data(): you try read data from empty file handle.\n");
@@ -100,27 +100,28 @@ int read_data(int file_handle, void* buffer, size_t f_size) {
         else {
             fprintf(stderr, "func read_data(): you try put info from file to empty buffer.\n");
         }
-        return ERROR;
+        return NULL_PTR;
     }
 
     assert(read(file_handle, buffer, f_size) != -1);
     if (*((char*)buffer + f_size - 1) != '\n') {
         *((char*)buffer + f_size - 1) = '\n';
     }
-    return 0;
+    return OK;
 }
 
-int write_data(int file_handle, text *strings, size_t number_strings) {
-    if ((file_handle == NULL) || strings == NULL) {
-        fprintf(stderr, "Func write_data(): you try");
-        return ERROR;
+ERORS write_data(int file_handle, text *strings, size_t number_strings) {
+    //I use NULL with f_handle because compiler forbids comparing int and nillptr_t(it`s like vpid*)
+    if ((file_handle == NULL) || strings == nullptr) {
+        fprintf(stderr, "Func write_data(): you try use null handle");
+        return NULL_PTR;
     }
     for (int string_num = 0; string_num < number_strings; string_num++) {
-        if (strings[string_num].length == 0) {continue;}
+        if (is_str_empty(strings, string_num) == 1) {continue;}
         assert(write(file_handle, strings[string_num].string, strings[string_num].length + 1) != -1);
     }
 
-    return 0;
+    return OK;
 }
 
 int file_close(int file_handle) {
@@ -130,3 +131,17 @@ int file_close(int file_handle) {
     return close(file_handle);
 }
 
+int Clean(char* buffer) {
+    free(buffer);
+
+    return 0;
+}
+
+int is_str_empty(text *strings, size_t string_pos) {
+    if (comp_letters(strings[string_pos].string, 0, strings[string_pos].length) == EMPTY) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}

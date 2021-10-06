@@ -6,11 +6,24 @@ size_t min_len (size_t len1, size_t len2) {
 }
 
 int is_letter(char val) {
-    if (val == ' ' || val == ',' || val == '.' || val == '\t') {
-        return 0;
+    if ((val >= 'a' && val <= 'z') || (val >= 'A' && val <= 'Z')) {
+        return 1;
     }
     else {
-        return 1;
+        return 0;
+    }
+}
+
+char lower(char val) {
+    if (val >= 'a' && val <= 'z') {
+        return val;
+    }
+    else if (val >= 'A' && val <= 'Z') {
+        return (char)(val + ('a' - 'A'));
+    }
+    else {
+        fprintf(stderr, "lower(): You trying to make lower not letter.\n");
+        return -1;
     }
 }
 
@@ -49,11 +62,11 @@ int rev_comparsion (const char* str1, size_t len1, const char* str2, size_t len2
             break;
         }
 
-        if (str1[len1 - (i + shift1)] > str2[len2 - (i + shift2)]) {
+        if (lower(str1[len1 - (i + shift1)]) > lower(str2[len2 - (i + shift2)])) {
             result = 1;
             break;
         }
-        else if (str1[len1 - (i + shift1)] < str2[len2 - (i + shift2)]) {
+        else if (lower(str1[len1 - (i + shift1)]) < lower(str2[len2 - (i + shift2)])) {
             result = -1;
             break;
         }

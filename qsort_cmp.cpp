@@ -5,11 +5,23 @@ size_t minim_len (size_t len1, size_t len2) {
 }
 
 int is_letters(char val) {
-    if (val == ' ' || val == ',' || val == '.' || val == '\t') {
-        return 0;
+    if ((val >= 'a' && val <= 'z') || (val >= 'A' && val <= 'Z')) {
+        return 1;
     }
     else {
-        return 1;
+        return 0;
+    }
+}
+char to_lower(char val) {
+    if (val >= 'a' && val <= 'z') {
+        return val;
+    }
+    else if (val >= 'A' && val <= 'Z') {
+        return (char)(val + ('a' - 'A'));
+    }
+    else {
+        fprintf(stderr, "lower(): You trying to make lower not letter.\n");
+        return -1;
     }
 }
 
@@ -50,7 +62,7 @@ int compare(const void* struct1, const void* struct2) {
             break;
         }
 
-        if (str1[i + shift1] > str2[i + shift2]) {
+        if (to_lower(str1[i + shift1]) > to_lower(str2[i + shift2])) {
             result = 1;
             break;
         }

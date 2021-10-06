@@ -8,7 +8,10 @@ enum LOGIC {
     EMPTY = -8,
 };
 enum ERORS {
-    ERROR = -1,
+    OK,
+    ERROR,
+    NULL_PTR,
+    WRONG_ANS,
 
 
 };
